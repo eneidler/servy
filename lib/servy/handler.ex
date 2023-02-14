@@ -12,21 +12,21 @@ defmodule Servy.Handler do
 
   @doc "Transforms the request into a response."
   def handle(request) do
-    request 
+    request
     |> parse
     |> rewrite_path
-    |> log 
-    |> route 
+    |> log
+    |> route
     |> track
     |> format_response
   end
 
   def route(%Conv{ method: "GET", path: "/wildthings" } = conv) do
-    %{ conv | status: 200, resp_body: "Bears, Lions, Tigers" }          
+    %{ conv | status: 200, resp_body: "Bears, Lions, Tigers" }
   end
 
   def route(%Conv{ method: "GET", path: "/bears" } = conv) do
-    %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington" }    
+    %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington" }
   end
 
   def route(%Conv{ method: "GET", path: "/bears/" <> id } = conv) do
